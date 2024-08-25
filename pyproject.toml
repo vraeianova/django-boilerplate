@@ -1,0 +1,33 @@
+[project]
+name = "django-boilerplate"
+version = "0.1.0"
+description = "Django curated boilerplate"
+authors = [{ name = "Cris Arias", email = "vraeianova@gmail.com" }]
+dependencies = ["django==5.0", "django-environ>=0.11.2"]
+requires-python = "==3.11.*"
+readme = "README.md"
+license = { text = "MIT" }
+
+[tool.pdm.scripts]
+#Django commands
+server = "python src/manage.py runserver"
+showmigrations = "python src/manage.py showmigrations"
+shell = "python src/manage.py shell_plus"
+makemigrations = "python src/manage.py makemigrations"
+createsuperuser = "python src/manage.py createsuperuser"
+collectstatic = "python src/manage.py collectstatic"
+startproject = "django-admin startproject src/project"
+migrate = "python src/manage.py migrate"
+
+#Lint
+format = { composite = ["isort .", "black ."] }
+pyfmt = "black --check ."
+ruff = "ruff check ."
+"lint:python" = { composite = ["ruff check .", "mypy ."] }
+lint = { composite = ["pyfmt", "lint:python"] }
+
+#Run python shell
+python = "python"
+
+[tool.pdm]
+distribution = false
