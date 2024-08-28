@@ -3,7 +3,16 @@ name = "django-boilerplate"
 version = "0.1.0"
 description = "Django curated boilerplate"
 authors = [{ name = "Cris Arias", email = "vraeianova@gmail.com" }]
-dependencies = ["django==5.0", "django-environ>=0.11.2"]
+dependencies = [
+    "django==5.0",
+    "django-environ>=0.11.2",
+    "mypy>=1.11.2",
+    "black>=24.8.0",
+    "ipython>=8.26.0",
+    "isort>=5.13.2",
+    "ruff>=0.6.2",
+    "pytest>=8.3.2",
+]
 requires-python = "==3.11.*"
 readme = "README.md"
 license = { text = "MIT" }
@@ -20,11 +29,10 @@ startproject = "django-admin startproject src/project"
 migrate = "python src/manage.py migrate"
 
 #Lint
-format = { composite = ["isort .", "black ."] }
-pyfmt = "black --check ."
-ruff = "ruff check ."
+"lint:pyfmt" = { composite = ["isort --check-only .", "black --check ."] }
 "lint:python" = { composite = ["ruff check .", "mypy ."] }
-lint = { composite = ["pyfmt", "lint:python"] }
+lint = { composite = ["lint:pyfmt", "lint:python"] }
+format = { composite = ["isort .", "black ."] }
 
 #Run python shell
 python = "python"
